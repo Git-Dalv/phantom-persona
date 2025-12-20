@@ -5,6 +5,7 @@ of the library, including browser settings, proxy configuration, fingerprints,
 behavior emulation, and retry logic.
 """
 
+from phantom_persona.config.loader import ConfigLoader
 from phantom_persona.config.schema import (
     BehaviorConfig,
     BrowserConfig,
@@ -21,4 +22,5 @@ __all__ = [
     "BehaviorConfig",
     "RetryConfig",
     "PhantomConfig",
+    "ConfigLoader",
 ]

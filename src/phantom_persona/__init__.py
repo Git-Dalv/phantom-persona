@@ -8,6 +8,7 @@ protection against anti-bot systems.
 from phantom_persona.config import (
     BehaviorConfig,
     BrowserConfig,
+    ConfigLoader,
     FingerprintConfig,
     PhantomConfig,
     ProxyConfig,
@@ -59,6 +60,7 @@ __all__ = [
     "FingerprintConfig",
     "BehaviorConfig",
     "RetryConfig",
+    "ConfigLoader",
     # Persona
     "GeoInfo",
     "DeviceInfo",

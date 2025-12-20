@@ -1,0 +1,77 @@
+# Default configuration for phantom-persona
+# Protection Level 1 - Basic Protection
+
+# Protection level (0-4)
+# 0: Minimal protection
+# 1: Basic protection (recommended for simple sites)
+# 2: Standard protection (recommended for most sites)
+# 3: Enhanced protection (for advanced protections)
+# 4: Maximum protection (for maximum protected sites)
+level: 1
+
+# Browser configuration
+browser:
+  # Browser type: chromium, firefox, or webkit
+  type: chromium
+
+  # Run in headless mode
+  headless: true
+
+  # Additional browser launch arguments
+  args: []
+
+  # Slow down operations in milliseconds (0 = normal speed)
+  slow_mo: 0
+
+# Proxy configuration
+proxy:
+  # Enable proxy usage
+  enabled: false
+
+  # Path to proxy file or URL (optional)
+  # source: "proxies.txt"
+  source: null
+
+  # Rotation strategy: per_session, per_request, or manual
+  rotation: per_session
+
+  # Validate proxies before use
+  validate: true
+
+  # Perform geographical lookup for proxies
+  geo_lookup: true
+
+# Fingerprint configuration
+fingerprint:
+  # Consistency level: auto, strict, or loose
+  # auto: automatic based on protection level
+  # strict: all fingerprint aspects match perfectly
+  # loose: some randomization allowed
+  consistency: auto
+
+  # Device type to emulate: desktop, mobile, or random
+  device_type: desktop
+
+# Behavior emulation configuration
+behavior:
+  # Add human-like delays between actions
+  human_delays: true
+
+  # Delay range in seconds [min, max]
+  delay_range:
+    - 0.3
+    - 1.5
+
+# Retry configuration
+retry:
+  # Enable automatic retries on failure
+  enabled: true
+
+  # Maximum number of retry attempts (1-10)
+  max_attempts: 3
+
+  # Backoff strategy: exponential, linear, or fixed
+  # exponential: 2^n seconds between retries
+  # linear: n seconds between retries
+  # fixed: constant delay between retries
+  backoff: exponential
