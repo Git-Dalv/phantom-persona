@@ -216,6 +216,22 @@ class DetectionException(PhantomException):
     """
 
 
+# Session-related exceptions
+class SessionError(PhantomException):
+    """Raised when session operation fails.
+
+    This exception is raised when session-level operations fail,
+    such as creating pages on a closed session or accessing
+    session resources that don't exist.
+
+    Example:
+        raise SessionError(
+            "Cannot create page on closed session",
+            details={"session_id": "session_123", "state": "closed"}
+        )
+    """
+
+
 __all__ = [
     # Base exception
     "PhantomException",
@@ -237,4 +253,6 @@ __all__ = [
     "ConfigValidationError",
     # Detection exception
     "DetectionException",
+    # Session exception
+    "SessionError",
 ]

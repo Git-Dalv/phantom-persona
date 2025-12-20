@@ -17,13 +17,16 @@ from phantom_persona.core.exceptions import (
     ProxyConnectionError,
     ProxyException,
     ProxyValidationError,
+    SessionError,
 )
+from phantom_persona.core.session import Session
 
 __all__ = [
     # Browser management
     "BrowserManager",
     "ContextBuilder",
     "ContextManager",
+    "Session",
     # Base exception
     "PhantomException",
     # Browser exceptions
@@ -44,4 +47,6 @@ __all__ = [
     "ConfigValidationError",
     # Detection exception
     "DetectionException",
+    # Session exception
+    "SessionError",
 ]
