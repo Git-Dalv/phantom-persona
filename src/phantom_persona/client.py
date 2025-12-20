@@ -179,6 +179,7 @@ class PhantomPersona:
             browser=self._browser_manager.browser,
             persona=persona,
             plugins=plugins,
+            browser_type=self.browser_type,
         )
         context = await context_manager.create()
 

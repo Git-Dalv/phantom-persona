@@ -185,6 +185,7 @@ class ContextManager:
         browser: "Browser",
         persona: "Persona",
         plugins: list["Plugin"],
+        browser_type: str = "chromium",
     ) -> None:
         """Initialize context manager.
 
@@ -192,14 +193,16 @@ class ContextManager:
             browser: Playwright browser instance
             persona: Persona configuration
             plugins: List of plugins to apply
+            browser_type: Browser type (chromium, firefox, webkit)
 
         Example:
             >>> plugins = registry.get_for_level(ProtectionLevel.MODERATE)
-            >>> manager = ContextManager(browser, persona, plugins)
+            >>> manager = ContextManager(browser, persona, plugins, "chromium")
         """
         self.browser = browser
         self.persona = persona
         self.plugins = plugins
+        self.browser_type = browser_type
         self._context: Optional["BrowserContext"] = None
 
     async def create(self) -> "BrowserContext":
@@ -242,7 +245,7 @@ class ContextManager:
         try:
             for plugin in sorted(self.plugins, key=lambda p: p.priority):
                 # Only apply if compatible with browser type
-                if plugin.is_compatible(self._context._browser._browser_type.name):
+                if plugin.is_compatible(self.browser_type):
                     await plugin.apply(self._context)
         except Exception as e:
             # If plugin application fails, close context and raise
