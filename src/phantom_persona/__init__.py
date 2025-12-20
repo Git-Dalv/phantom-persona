@@ -5,6 +5,7 @@ featuring unique fingerprints, behavioral patterns, and multi-level
 protection against anti-bot systems.
 """
 
+from phantom_persona.client import PhantomPersona
 from phantom_persona.config import (
     BehaviorConfig,
     BrowserConfig,
@@ -51,6 +52,8 @@ __version__ = "0.1.0"
 __all__ = [
     # Version
     "__version__",
+    # Client
+    "PhantomPersona",
     # Core
     "BrowserManager",
     "ContextBuilder",
