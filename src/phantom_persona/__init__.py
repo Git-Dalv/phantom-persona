@@ -11,8 +11,11 @@ from phantom_persona.config import (
     ConfigLoader,
     FingerprintConfig,
     PhantomConfig,
+    ProtectionLevel,
     ProxyConfig,
     RetryConfig,
+    get_level_description,
+    get_plugins_for_level,
 )
 from phantom_persona.core.exceptions import (
     BrowserContextError,
@@ -61,6 +64,9 @@ __all__ = [
     "BehaviorConfig",
     "RetryConfig",
     "ConfigLoader",
+    "ProtectionLevel",
+    "get_plugins_for_level",
+    "get_level_description",
     # Persona
     "GeoInfo",
     "DeviceInfo",
