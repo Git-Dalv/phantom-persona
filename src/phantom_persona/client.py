@@ -200,27 +200,30 @@ class PhantomPersona:
         Example:
             >>> persona = client._create_default_persona()
             >>> print(persona.geo.country)
-            US
+            United States
         """
+        from datetime import datetime
+
         # Default geo info
         geo = GeoInfo(
-            country="US",
-            region="California",
+            country_code="US",
+            country="United States",
             city="San Francisco",
             timezone="America/Los_Angeles",
             language="en-US",
-            latitude=37.7749,
-            longitude=-122.4194,
+            languages=["en-US", "en"],
         )
 
         # Default device info
         device = DeviceInfo(
+            type="desktop",
             platform="Win32",
+            vendor="Google Inc.",
+            renderer="ANGLE (Intel, Intel(R) UHD Graphics 630 Direct3D11 vs_5_0 ps_5_0)",
             screen_width=1920,
             screen_height=1080,
+            color_depth=24,
             pixel_ratio=1.0,
-            touch_support=False,
-            max_touch_points=0,
         )
 
         # Default fingerprint
@@ -231,17 +234,15 @@ class PhantomPersona:
                 "Chrome/120.0.0.0 Safari/537.36"
             ),
             device=device,
-            webgl_vendor="Google Inc. (Intel)",
-            webgl_renderer="ANGLE (Intel, Intel(R) UHD Graphics 630 Direct3D11 vs_5_0 ps_5_0)",
-            audio_hash=f"audio_{uuid4().hex[:12]}",
             canvas_hash=f"canvas_{uuid4().hex[:12]}",
-            webrtc_ip="192.168.1.100",
+            audio_hash=f"audio_{uuid4().hex[:12]}",
         )
 
         # Create persona
         persona = Persona(
             fingerprint=fingerprint,
             geo=geo,
+            created_at=datetime.now(),
         )
 
         return persona
