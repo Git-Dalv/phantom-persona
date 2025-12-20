@@ -1,7 +1,7 @@
-"""Базовые примеры использования phantom-persona.
+"""Basic usage examples for phantom-persona.
 
-Этот файл демонстрирует основные возможности библиотеки phantom-persona
-для автоматизации браузера с защитой от детекции ботов.
+This file demonstrates the core capabilities of the phantom-persona library
+for browser automation with bot detection protection.
 """
 
 import asyncio
@@ -10,79 +10,79 @@ from phantom_persona import PhantomPersona, ProtectionLevel
 
 
 async def basic_example():
-    """Базовое использование с context manager.
+    """Basic usage with context manager.
 
-    Создаёт клиент PhantomPersona с базовым уровнем защиты,
-    открывает страницу и делает скриншот.
+    Creates a PhantomPersona client with basic protection level,
+    opens a page and takes a screenshot.
     """
     print("=== Basic Example ===")
 
-    # Использование async context manager для автоматической очистки
+    # Use async context manager for automatic cleanup
     async with PhantomPersona(level=ProtectionLevel.BASIC) as phantom:
-        # Создаём сессию
+        # Create session
         session = await phantom.new_session()
 
-        # Создаём страницу
+        # Create page
         page = await session.new_page()
 
-        # Переходим на сайт детекции ботов
+        # Navigate to bot detection site
         print("Navigating to bot detection site...")
         await page.goto("https://bot.sannysoft.com", wait_until="networkidle")
 
-        # Даём странице время на выполнение тестов
+        # Give page time to run tests
         await asyncio.sleep(3)
 
-        # Сохраняем скриншот
+        # Save screenshot
         await page.screenshot(path="detection_test.png")
         print("✓ Screenshot saved to detection_test.png")
 
-        # Получаем заголовок страницы
+        # Get page title
         title = await page.title()
         print(f"✓ Page title: {title}")
 
-        # Закрываем сессию
+        # Close session
         await session.close()
 
     print("✓ Browser closed automatically")
 
 
 async def session_example():
-    """Пример работы с сессиями.
+    """Example of working with sessions.
 
-    Демонстрирует создание и использование сессий,
-    а также человекоподобное поведение.
+    Demonstrates session creation and usage,
+    as well as human-like behavior.
     """
     print("\n=== Session Example ===")
 
-    # Создаём клиент с уровнем защиты MODERATE
+    # Create client with MODERATE protection level
     async with PhantomPersona(level=ProtectionLevel.MODERATE) as phantom:
-        # Создаём сессию
+        # Create session
         session = await phantom.new_session()
 
         try:
-            # Создаём страницу
+            # Create page
             page = await session.new_page()
 
-            # Переходим на сайт
+            # Navigate to site
             print("Navigating to example.com...")
             await page.goto("https://example.com")
 
-            # Человеческая задержка перед действиями
+            # Human-like delay before actions
             print("Simulating human delay...")
             await session.human_delay()
 
-            # Получаем информацию со страницы
+            # Get information from page
             title = await page.title()
             url = page.url
             print(f"✓ Title: {title}")
             print(f"✓ URL: {url}")
 
-            # Прокрутка страницы (человекоподобная)
+            # Scroll page (human-like)
             print("Scrolling page...")
             await session.human_scroll(page, distance=500)
 
         finally:
-            # Всегда закрываем сессию
+            # Always close session
             await session.close()
 
     print("✓ Session closed")
