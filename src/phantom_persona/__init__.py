@@ -22,6 +22,7 @@ from phantom_persona.core.exceptions import (
     ProxyValidationError,
 )
 from phantom_persona.persona import DeviceInfo, Fingerprint, GeoInfo, Persona
+from phantom_persona.proxy import ProxyInfo
 
 __version__ = "0.1.0"
 
@@ -48,4 +49,6 @@ __all__ = [
     "DeviceInfo",
     "Fingerprint",
     "Persona",
+    # Proxy
+    "ProxyInfo",
 ]

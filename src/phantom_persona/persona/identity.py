@@ -6,8 +6,11 @@ including geographical information, device characteristics, and fingerprints.
 
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
-from typing import Any, Literal, Optional
+from typing import TYPE_CHECKING, Any, Literal, Optional
 from uuid import uuid4
+
+if TYPE_CHECKING:
+    from phantom_persona.proxy.models import ProxyInfo
 
 
 @dataclass
@@ -151,7 +154,7 @@ class Persona:
     geo: GeoInfo
     created_at: datetime
     id: str = field(default_factory=lambda: str(uuid4()))
-    proxy: Optional[Any] = None  # Will be ProxyInfo once defined
+    proxy: Optional["ProxyInfo"] = None
     cookies: dict[str, Any] = field(default_factory=dict)
     local_storage: dict[str, Any] = field(default_factory=dict)
     last_used: Optional[datetime] = None
