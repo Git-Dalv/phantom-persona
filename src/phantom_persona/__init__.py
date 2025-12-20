@@ -21,6 +21,7 @@ from phantom_persona.core.exceptions import (
     ProxyException,
     ProxyValidationError,
 )
+from phantom_persona.persona import DeviceInfo, Fingerprint, GeoInfo, Persona
 
 __version__ = "0.1.0"
 
@@ -42,4 +43,9 @@ __all__ = [
     "ConfigNotFoundError",
     "ConfigValidationError",
     "DetectionException",
+    # Persona
+    "GeoInfo",
+    "DeviceInfo",
+    "Fingerprint",
+    "Persona",
 ]
