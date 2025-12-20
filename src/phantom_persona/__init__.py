@@ -17,7 +17,7 @@ from phantom_persona.config import (
     get_level_description,
     get_plugins_for_level,
 )
-from phantom_persona.core import BrowserManager, ContextBuilder, ContextManager
+from phantom_persona.core import BrowserManager, ContextBuilder, ContextManager, Session
 from phantom_persona.core.exceptions import (
     BrowserContextError,
     BrowserException,
@@ -33,6 +33,7 @@ from phantom_persona.core.exceptions import (
     ProxyConnectionError,
     ProxyException,
     ProxyValidationError,
+    SessionError,
 )
 from phantom_persona.persona import DeviceInfo, Fingerprint, GeoInfo, Persona
 from phantom_persona.plugins import (
@@ -54,6 +55,7 @@ __all__ = [
     "BrowserManager",
     "ContextBuilder",
     "ContextManager",
+    "Session",
     # Exceptions
     "PhantomException",
     "BrowserException",
@@ -69,6 +71,7 @@ __all__ = [
     "ConfigNotFoundError",
     "ConfigValidationError",
     "DetectionException",
+    "SessionError",
     # Configuration
     "PhantomConfig",
     "BrowserConfig",
