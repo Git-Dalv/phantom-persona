@@ -43,7 +43,7 @@ class ProxyConfig(BaseModel):
         enabled: Whether to use proxy
         source: Path to proxy file or URL for proxy list
         rotation: Proxy rotation strategy
-        validate: Whether to validate proxies before use
+        validate_proxies: Whether to validate proxies before use
         geo_lookup: Whether to perform geographical lookup for proxies
 
     Example:
@@ -57,7 +57,7 @@ class ProxyConfig(BaseModel):
     rotation: Literal["per_session", "per_request", "manual"] = Field(
         default="per_session", description="Proxy rotation strategy"
     )
-    validate: bool = Field(default=True, description="Validate proxies before use")
+    validate_proxies: bool = Field(default=True, description="Validate proxies before use")
     geo_lookup: bool = Field(
         default=True, description="Perform geographical lookup for proxies"
     )
