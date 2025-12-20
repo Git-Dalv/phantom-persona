@@ -17,6 +17,7 @@ from phantom_persona.config import (
     get_level_description,
     get_plugins_for_level,
 )
+from phantom_persona.core import BrowserManager
 from phantom_persona.core.exceptions import (
     BrowserContextError,
     BrowserException,
@@ -49,6 +50,8 @@ __version__ = "0.1.0"
 __all__ = [
     # Version
     "__version__",
+    # Core
+    "BrowserManager",
     # Exceptions
     "PhantomException",
     "BrowserException",

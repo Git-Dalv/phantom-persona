@@ -1,5 +1,6 @@
 """Core functionality for phantom-persona library."""
 
+from phantom_persona.core.browser import BrowserManager
 from phantom_persona.core.exceptions import (
     BrowserContextError,
     BrowserException,
@@ -18,6 +19,8 @@ from phantom_persona.core.exceptions import (
 )
 
 __all__ = [
+    # Browser management
+    "BrowserManager",
     # Base exception
     "PhantomException",
     # Browser exceptions
