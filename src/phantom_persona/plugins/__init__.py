@@ -11,10 +11,14 @@ from phantom_persona.plugins.base import (
     Plugin,
     StealthPlugin,
 )
+from phantom_persona.plugins.registry import PluginRegistry, register_plugin, registry
 
 __all__ = [
     "Plugin",
     "StealthPlugin",
     "FingerprintPlugin",
     "BehaviorPlugin",
+    "PluginRegistry",
+    "registry",
+    "register_plugin",
 ]
