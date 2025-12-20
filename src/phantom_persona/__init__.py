@@ -5,6 +5,14 @@ featuring unique fingerprints, behavioral patterns, and multi-level
 protection against anti-bot systems.
 """
 
+from phantom_persona.config import (
+    BehaviorConfig,
+    BrowserConfig,
+    FingerprintConfig,
+    PhantomConfig,
+    ProxyConfig,
+    RetryConfig,
+)
 from phantom_persona.core.exceptions import (
     BrowserContextError,
     BrowserException,
@@ -44,6 +52,13 @@ __all__ = [
     "ConfigNotFoundError",
     "ConfigValidationError",
     "DetectionException",
+    # Configuration
+    "PhantomConfig",
+    "BrowserConfig",
+    "ProxyConfig",
+    "FingerprintConfig",
+    "BehaviorConfig",
+    "RetryConfig",
     # Persona
     "GeoInfo",
     "DeviceInfo",
