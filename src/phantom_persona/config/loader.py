@@ -6,7 +6,7 @@ including YAML files, JSON files, and dictionaries.
 
 import json
 from pathlib import Path
-from typing import Any, Union
+from typing import Any, Dict, Union
 
 import yaml
 from pydantic import ValidationError
@@ -33,7 +33,7 @@ class ConfigLoader:
     """
 
     @staticmethod
-    def load(source: Union[str, Path, dict[str, Any]]) -> PhantomConfig:
+    def load(source: Union[str, Path, Dict[str, Any]]) -> PhantomConfig:
         """Load configuration from various sources.
 
         Automatically detects the source type and loads configuration:
@@ -93,7 +93,7 @@ class ConfigLoader:
             ) from e
 
     @staticmethod
-    def load_yaml(path: Path) -> dict[str, Any]:
+    def load_yaml(path: Path) -> Dict[str, Any]:
         """Load configuration from YAML file.
 
         Args:
@@ -124,7 +124,7 @@ class ConfigLoader:
             ) from e
 
     @staticmethod
-    def load_json(path: Path) -> dict[str, Any]:
+    def load_json(path: Path) -> Dict[str, Any]:
         """Load configuration from JSON file.
 
         Args:
@@ -154,7 +154,7 @@ class ConfigLoader:
             ) from e
 
     @staticmethod
-    def merge_with_defaults(config: dict[str, Any]) -> dict[str, Any]:
+    def merge_with_defaults(config: Dict[str, Any]) -> Dict[str, Any]:
         """Merge configuration with default values.
 
         This method ensures that all required fields have values,

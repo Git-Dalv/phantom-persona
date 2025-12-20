@@ -5,6 +5,7 @@ and maps each level to the appropriate set of plugins.
 """
 
 from enum import IntEnum
+from typing import Dict, List, Union
 
 
 class ProtectionLevel(IntEnum):
@@ -29,7 +30,7 @@ class ProtectionLevel(IntEnum):
 
 
 # Mapping of protection levels to plugin lists
-LEVEL_PLUGINS: dict[ProtectionLevel, list[str]] = {
+LEVEL_PLUGINS: Dict[ProtectionLevel, List[str]] = {
     ProtectionLevel.NONE: [
         # No plugins - pure Playwright
     ],
@@ -143,7 +144,7 @@ LEVEL_DESCRIPTIONS: dict[ProtectionLevel, str] = {
 }
 
 
-def get_plugins_for_level(level: ProtectionLevel | int) -> list[str]:
+def get_plugins_for_level(level: Union[ProtectionLevel, int]) -> List[str]:
     """Get list of plugins for a protection level.
 
     Args:
@@ -179,7 +180,7 @@ def get_plugins_for_level(level: ProtectionLevel | int) -> list[str]:
     return LEVEL_PLUGINS[level].copy()
 
 
-def get_level_description(level: ProtectionLevel | int) -> str:
+def get_level_description(level: Union[ProtectionLevel, int]) -> str:
     """Get description of what a protection level does.
 
     Args:

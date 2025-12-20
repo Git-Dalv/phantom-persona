@@ -4,7 +4,7 @@ This module defines all custom exceptions used throughout the library,
 organized in a clear hierarchy for better error handling and debugging.
 """
 
-from typing import Any, Optional
+from typing import Any, Dict, Optional
 
 
 class PhantomException(Exception):
@@ -18,7 +18,7 @@ class PhantomException(Exception):
         details: Optional dictionary with additional error context
     """
 
-    def __init__(self, message: str, details: Optional[dict[str, Any]] = None) -> None:
+    def __init__(self, message: str, details: Optional[Dict[str, Any]] = None) -> None:
         """Initialize exception with message and optional details.
 
         Args:

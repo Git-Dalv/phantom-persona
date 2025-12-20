@@ -6,7 +6,7 @@ persona, and human-like behavior into a convenient high-level API.
 
 import asyncio
 import random
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any, List, Optional, Tuple
 
 from phantom_persona.config.schema import BehaviorConfig
 from phantom_persona.core.exceptions import SessionError
@@ -57,7 +57,7 @@ class Session:
         self.context = context
         self.persona = persona
         self.behavior = behavior_config or BehaviorConfig()
-        self._pages: list["Page"] = []
+        self._pages: List["Page"] = []
         self._closed: bool = False
 
     async def new_page(self) -> "Page":
@@ -150,7 +150,7 @@ class Session:
         page: "Page",
         selector: str,
         text: str,
-        delay_range: tuple[float, float] = (0.05, 0.15),
+        delay_range: Tuple[float, float] = (0.05, 0.15),
     ) -> None:
         """Type text with human-like speed.
 
@@ -299,7 +299,7 @@ class Session:
         return self._pages[-1]
 
     @property
-    def pages(self) -> list["Page"]:
+    def pages(self) -> List["Page"]:
         """Get all pages in this session.
 
         Returns:

@@ -6,7 +6,7 @@ and session creation.
 """
 
 from pathlib import Path
-from typing import Any, Optional, Union
+from typing import Any, List, Optional, Union
 from uuid import uuid4
 
 from phantom_persona.config import ConfigLoader, PhantomConfig, ProtectionLevel
@@ -353,7 +353,7 @@ class PhantomPersona:
         return self._started
 
     @property
-    def plugins(self) -> list[str]:
+    def plugins(self) -> List[str]:
         """Get list of plugin names for current protection level.
 
         Returns:
