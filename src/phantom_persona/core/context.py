@@ -4,7 +4,7 @@ This module provides builders and managers for creating Playwright browser
 contexts configured with persona fingerprints, proxy settings, and plugins.
 """
 
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 from phantom_persona.core.exceptions import BrowserContextError
 
@@ -38,7 +38,7 @@ class ContextBuilder:
             >>> builder = ContextBuilder(browser)
         """
         self._browser = browser
-        self._options: dict[str, Any] = {}
+        self._options: Dict[str, Any] = {}
 
     def with_persona(self, persona: "Persona") -> "ContextBuilder":
         """Apply persona settings to context.
@@ -96,7 +96,7 @@ class ContextBuilder:
         self._options["proxy"] = proxy.playwright_proxy
         return self
 
-    def with_storage_state(self, state: dict[str, Any]) -> "ContextBuilder":
+    def with_storage_state(self, state: Dict[str, Any]) -> "ContextBuilder":
         """Restore cookies and localStorage from storage state.
 
         Args:
@@ -154,7 +154,7 @@ class ContextBuilder:
                 details={"options": self._options, "error": str(e)},
             ) from e
 
-    def get_options(self) -> dict[str, Any]:
+    def get_options(self) -> Dict[str, Any]:
         """Get current context options.
 
         Returns:
@@ -184,7 +184,7 @@ class ContextManager:
         self,
         browser: "Browser",
         persona: "Persona",
-        plugins: list["Plugin"],
+        plugins: List["Plugin"],
         browser_type: str = "chromium",
     ) -> None:
         """Initialize context manager.
@@ -257,7 +257,7 @@ class ContextManager:
 
         return self._context
 
-    async def close(self) -> dict[str, Any]:
+    async def close(self) -> Dict[str, Any]:
         """Close context and return storage state.
 
         Saves cookies and localStorage before closing the context,
@@ -271,7 +271,7 @@ class ContextManager:
             >>> # Save storage to persona for next session
             >>> persona.cookies = storage.get("cookies", [])
         """
-        storage: dict[str, Any] = {}
+        storage: Dict[str, Any] = {}
 
         if self._context:
             try:

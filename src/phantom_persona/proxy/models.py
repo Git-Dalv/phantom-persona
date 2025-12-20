@@ -6,7 +6,7 @@ including validation, status tracking, and format conversions.
 
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Any, Literal, Optional
+from typing import Any, Dict, Literal, Optional
 from urllib.parse import quote, urlparse
 
 from phantom_persona.persona.identity import GeoInfo
@@ -78,7 +78,7 @@ class ProxyInfo:
         return f"{self.protocol}://{self.host}:{self.port}"
 
     @property
-    def playwright_proxy(self) -> dict[str, Any]:
+    def playwright_proxy(self) -> Dict[str, Any]:
         """Generate Playwright-compatible proxy configuration.
 
         Returns:
@@ -89,7 +89,7 @@ class ProxyInfo:
             >>> proxy.playwright_proxy
             {'server': 'http://proxy.com:8080', 'username': 'user', 'password': 'pass'}
         """
-        config: dict[str, Any] = {"server": f"{self.protocol}://{self.host}:{self.port}"}
+        config: Dict[str, Any] = {"server": f"{self.protocol}://{self.host}:{self.port}"}
         if self.username:
             config["username"] = self.username
         if self.password:

@@ -5,7 +5,7 @@ including automatic discovery and instantiation based on protection levels.
 """
 
 import importlib
-from typing import TYPE_CHECKING, Optional, Type
+from typing import TYPE_CHECKING, Dict, List, Optional, Type, Union
 
 from phantom_persona.config.levels import LEVEL_PLUGINS, ProtectionLevel
 
@@ -45,7 +45,7 @@ class PluginRegistry:
         """
         if cls._instance is None:
             cls._instance = super().__new__(cls)
-            cls._instance._plugins: dict[str, Type["Plugin"]] = {}
+            cls._instance._plugins: Dict[str, Type["Plugin"]] = {}
         return cls._instance
 
     def register(self, plugin_class: Type["Plugin"]) -> Type["Plugin"]:
@@ -107,8 +107,8 @@ class PluginRegistry:
         return self._plugins[name]
 
     def get_for_level(
-        self, level: ProtectionLevel | int, browser_type: str = "chromium"
-    ) -> list["Plugin"]:
+        self, level: Union[ProtectionLevel, int], browser_type: str = "chromium"
+    ) -> List["Plugin"]:
         """Get instantiated plugins for a protection level.
 
         Retrieves all plugins defined for the given protection level,
@@ -135,7 +135,7 @@ class PluginRegistry:
             level = ProtectionLevel(level)
 
         plugin_names = LEVEL_PLUGINS.get(level, [])
-        plugins: list["Plugin"] = []
+        plugins: List["Plugin"] = []
 
         for name in plugin_names:
             try:
@@ -154,7 +154,7 @@ class PluginRegistry:
         # Sort by priority (lower values first)
         return sorted(plugins, key=lambda p: p.priority)
 
-    def list_all(self) -> list[str]:
+    def list_all(self) -> List[str]:
         """List all registered plugin names.
 
         Returns:

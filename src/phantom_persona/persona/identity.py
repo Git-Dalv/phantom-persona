@@ -6,7 +6,7 @@ including geographical information, device characteristics, and fingerprints.
 
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, Literal, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Literal, Optional
 from uuid import uuid4
 
 if TYPE_CHECKING:
@@ -44,7 +44,7 @@ class GeoInfo:
     city: Optional[str]
     timezone: str
     language: str
-    languages: list[str]
+    languages: List[str]
 
 
 @dataclass
@@ -117,7 +117,7 @@ class Fingerprint:
     canvas_hash: Optional[str] = None
     webgl_hash: Optional[str] = None
     audio_hash: Optional[str] = None
-    fonts: list[str] = field(default_factory=list)
+    fonts: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -155,8 +155,8 @@ class Persona:
     created_at: datetime
     id: str = field(default_factory=lambda: str(uuid4()))
     proxy: Optional["ProxyInfo"] = None
-    cookies: dict[str, Any] = field(default_factory=dict)
-    local_storage: dict[str, Any] = field(default_factory=dict)
+    cookies: Dict[str, Any] = field(default_factory=dict)
+    local_storage: Dict[str, Any] = field(default_factory=dict)
     last_used: Optional[datetime] = None
     use_count: int = 0
     is_burned: bool = False
@@ -193,7 +193,7 @@ class Persona:
         """
         self.is_burned = True
 
-    def to_dict(self) -> dict[str, Any]:
+    def to_dict(self) -> Dict[str, Any]:
         """Convert persona to dictionary representation.
 
         Serializes the persona and all nested dataclasses to a dictionary
@@ -217,7 +217,7 @@ class Persona:
         return data
 
     @classmethod
-    def from_dict(cls, data: dict[str, Any]) -> "Persona":
+    def from_dict(cls, data: Dict[str, Any]) -> "Persona":
         """Create Persona instance from dictionary.
 
         Deserializes a persona from dictionary format, handling nested
