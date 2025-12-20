@@ -1,0 +1,41 @@
+"""Core functionality for phantom-persona library."""
+
+from phantom_persona.core.exceptions import (
+    BrowserContextError,
+    BrowserException,
+    BrowserLaunchError,
+    ConfigException,
+    ConfigNotFoundError,
+    ConfigValidationError,
+    DetectionException,
+    PersonaException,
+    PersonaExpiredError,
+    PersonaNotFoundError,
+    PhantomException,
+    ProxyConnectionError,
+    ProxyException,
+    ProxyValidationError,
+)
+
+__all__ = [
+    # Base exception
+    "PhantomException",
+    # Browser exceptions
+    "BrowserException",
+    "BrowserLaunchError",
+    "BrowserContextError",
+    # Proxy exceptions
+    "ProxyException",
+    "ProxyValidationError",
+    "ProxyConnectionError",
+    # Persona exceptions
+    "PersonaException",
+    "PersonaNotFoundError",
+    "PersonaExpiredError",
+    # Config exceptions
+    "ConfigException",
+    "ConfigNotFoundError",
+    "ConfigValidationError",
+    # Detection exception
+    "DetectionException",
+]
