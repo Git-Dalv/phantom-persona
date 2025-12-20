@@ -1,0 +1,266 @@
+# Phantom Persona
+
+**Browser automation library with anti-detect capabilities built on Playwright**
+
+Phantom Persona is an advanced Python library for browser automation that creates unique browser sessions with realistic fingerprints, behavioral patterns, and proxy support to bypass anti-bot protections. Built on top of Playwright with async/await support and type hints.
+
+## Features
+
+- 🎭 **Unique Fingerprints** - Generate realistic browser fingerprints
+- 🛡️ **Multi-level Protection** - 5 protection levels (0-4) from detection
+- 🌐 **Proxy Support** - Integration with various proxy providers
+- 🤖 **Human-like Behavior** - Mimic real user interactions
+- ⚡ **Async/Await** - Full asynchronous programming support
+- 📝 **Type Hints** - Fully typed for code safety
+- 🔌 **Plugins** - Extensible architecture
+
+## Installation
+
+### Requirements
+
+- Python 3.9+
+- pip or poetry
+
+### Basic Installation
+
+```bash
+pip install phantom-persona
+```
+
+### Install Playwright Browsers
+
+After installing the package, install Playwright browsers:
+
+```bash
+playwright install chromium
+```
+
+### Development Installation
+
+```bash
+git clone https://github.com/yourusername/phantom-persona.git
+cd phantom-persona
+pip install -e ".[dev]"
+playwright install chromium
+```
+
+## Quick Start
+
+### Basic Usage
+
+```python
+import asyncio
+from phantom_persona import PhantomClient
+
+async def main():
+    # Create client with protection level 2
+    async with PhantomClient(protection_level=2) as client:
+        # Navigate to page
+        page = await client.new_page()
+        await page.goto("https://example.com")
+
+        # Your scraping code
+        content = await page.content()
+        print(content)
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+### Using with Proxy
+
+```python
+import asyncio
+from phantom_persona import PhantomClient
+from phantom_persona.proxy import ProxyConfig
+
+async def main():
+    proxy = ProxyConfig(
+        server="http://proxy.example.com:8080",
+        username="user",
+        password="pass"
+    )
+
+    async with PhantomClient(protection_level=3, proxy=proxy) as client:
+        page = await client.new_page()
+        await page.goto("https://httpbin.org/ip")
+        print(await page.content())
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+### Custom Fingerprints
+
+```python
+import asyncio
+from phantom_persona import PhantomClient
+from phantom_persona.fingerprint import FingerprintConfig
+
+async def main():
+    fingerprint = FingerprintConfig(
+        user_agent="Mozilla/5.0...",
+        viewport={"width": 1920, "height": 1080},
+        locale="en-US",
+        timezone="America/New_York"
+    )
+
+    async with PhantomClient(
+        protection_level=4,
+        fingerprint=fingerprint
+    ) as client:
+        page = await client.new_page()
+        await page.goto("https://example.com")
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+## Protection Levels
+
+Phantom Persona offers 5 protection levels (0-4), each with a different balance between performance and stealth:
+
+### Level 0 - Minimal Protection
+**Performance: ⚡⚡⚡⚡⚡ | Stealth: 🛡️**
+
+- Basic Playwright settings
+- Random User-Agent
+- Minimal browser modifications
+- **Use case**: Testing, unprotected sites
+
+### Level 1 - Basic Protection
+**Performance: ⚡⚡⚡⚡ | Stealth: 🛡️🛡️**
+
+- Level 0 +
+- Hide WebDriver flags
+- Basic automation masking
+- Random viewport
+- **Use case**: Simple sites with basic protection
+
+### Level 2 - Standard Protection (Recommended)
+**Performance: ⚡⚡⚡ | Stealth: 🛡️🛡️🛡️**
+
+- Level 1 +
+- Full fingerprint (Canvas, WebGL, Audio)
+- Permissions API masking
+- Realistic HTTP headers
+- Basic human-like behavior (delays)
+- **Use case**: Most protected sites
+
+### Level 3 - Enhanced Protection
+**Performance: ⚡⚡ | Stealth: 🛡️🛡️🛡️🛡️**
+
+- Level 2 +
+- Advanced human-like behavior (mouse movements, scrolling)
+- Platform emulation (fonts, plugins)
+- Extended Chrome DevTools Protocol masking
+- Fingerprint rotation
+- **Use case**: Sites with advanced protection (Cloudflare, DataDome)
+
+### Level 4 - Maximum Protection
+**Performance: ⚡ | Stealth: 🛡️🛡️🛡️🛡️🛡️**
+
+- Level 3 +
+- Full real user emulation
+- Multiple random interactions
+- Advanced browser quirks emulation
+- JavaScript-level anti-fingerprinting
+- Browser extension emulation
+- **Use case**: Maximum protected sites, anti-bot systems
+
+### Choosing Protection Level
+
+```python
+# For most cases
+client = PhantomClient(protection_level=2)
+
+# For maximum protected sites
+client = PhantomClient(protection_level=4)
+
+# For fast parsing of unprotected sites
+client = PhantomClient(protection_level=0)
+```
+
+## Project Architecture
+
+```
+phantom-persona/
+├── src/phantom_persona/
+│   ├── __init__.py           # Public API
+│   ├── client.py             # Main client
+│   ├── config/               # Configuration
+│   ├── core/                 # Core library
+│   ├── fingerprint/          # Fingerprint generation
+│   │   └── plugins/          # Fingerprint plugins
+│   ├── stealth/              # Stealth techniques
+│   │   └── plugins/          # Stealth plugins
+│   ├── behavior/             # Behavioral patterns
+│   ├── proxy/                # Proxy handling
+│   ├── persona/              # Persona management
+│   ├── plugins/              # Common plugins
+│   └── utils/                # Utilities
+├── tests/                    # Tests
+├── examples/                 # Usage examples
+├── configs/                  # Configuration files
+├── data/                     # Data (fingerprints, user agents)
+└── pyproject.toml            # Project configuration
+```
+
+## Development
+
+### Setup Environment
+
+```bash
+# Clone repository
+git clone https://github.com/yourusername/phantom-persona.git
+cd phantom-persona
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# or
+venv\Scripts\activate  # Windows
+
+# Install dependencies
+pip install -e ".[dev]"
+playwright install chromium
+```
+
+### Running Tests
+
+```bash
+# All tests
+pytest
+
+# Only unit tests
+pytest -m unit
+
+# Without slow tests
+pytest -m "not slow"
+```
+
+### Code Standards
+
+- ✅ **Type hints required** for all functions and methods
+- ✅ **Async/await** for all I/O operations
+- ✅ **Docstrings** for public API (Google style)
+- ✅ **Pytest** for testing
+- ✅ **Pydantic** for data validation
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details
+
+## Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+## Support
+
+- 📖 [Documentation](https://github.com/yourusername/phantom-persona/wiki)
+- 🐛 [Issue Tracker](https://github.com/yourusername/phantom-persona/issues)
+- 💬 [Discussions](https://github.com/yourusername/phantom-persona/discussions)
+
+---
+
+**⚠️ Disclaimer**: This tool is created for educational purposes and legitimate testing only. Users are responsible for complying with laws and website terms of service.

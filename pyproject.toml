@@ -1,0 +1,78 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "phantom-persona"
+version = "0.1.0"
+description = "Browser automation library with anti-detect capabilities built on Playwright"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "Phantom Persona Team", email = "team@phantom-persona.dev"}
+]
+keywords = ["playwright", "automation", "anti-detect", "fingerprint", "web-scraping", "stealth"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Browsers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "playwright>=1.40.0",
+    "pydantic>=2.0",
+    "pyyaml",
+    "httpx",
+    "python-dateutil",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-playwright>=0.4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/phantom-persona"
+Repository = "https://github.com/yourusername/phantom-persona"
+Issues = "https://github.com/yourusername/phantom-persona/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["phantom_persona*"]
+
+[tool.setuptools.package-data]
+phantom_persona = ["py.typed"]
+
+[project.entry-points."phantom_persona"]
+phantom_persona = "phantom_persona:__version__"
+
+# Pytest configuration
+[tool.pytest.ini_options]
+minversion = "7.0"
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--showlocals",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
