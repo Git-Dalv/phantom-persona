@@ -105,7 +105,7 @@ LEVEL_PLUGINS: Dict[ProtectionLevel, List[str]] = {
 
 
 # Descriptions for each protection level
-LEVEL_DESCRIPTIONS: dict[ProtectionLevel, str] = {
+LEVEL_DESCRIPTIONS: Dict[ProtectionLevel, str] = {
     ProtectionLevel.NONE: (
         "Level 0 - Minimal Protection:\n"
         "Pure Playwright with minimal modifications. "
@@ -217,7 +217,7 @@ def get_level_description(level: Union[ProtectionLevel, int]) -> str:
     return LEVEL_DESCRIPTIONS[level]
 
 
-def list_all_levels() -> dict[int, str]:
+def list_all_levels() -> Dict[int, str]:
     """List all available protection levels with brief descriptions.
 
     Returns:
