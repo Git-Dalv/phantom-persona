@@ -4,7 +4,7 @@ This module defines the configuration models for phantom-persona using Pydantic 
 providing validation, serialization, and type safety for all configuration options.
 """
 
-from typing import Literal
+from typing import List, Literal, Optional, Tuple
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -30,7 +30,7 @@ class BrowserConfig(BaseModel):
         default="chromium", description="Browser type to use"
     )
     headless: bool = Field(default=True, description="Run browser in headless mode")
-    args: list[str] = Field(default_factory=list, description="Additional launch arguments")
+    args: List[str] = Field(default_factory=list, description="Additional launch arguments")
     slow_mo: int = Field(default=0, ge=0, description="Slow down operations in milliseconds")
 
 
@@ -53,7 +53,7 @@ class ProxyConfig(BaseModel):
     """
 
     enabled: bool = Field(default=False, description="Enable proxy usage")
-    source: str | None = Field(default=None, description="Path to proxy file or URL")
+    source: Optional[str] = Field(default=None, description="Path to proxy file or URL")
     rotation: Literal["per_session", "per_request", "manual"] = Field(
         default="per_session", description="Proxy rotation strategy"
     )
@@ -105,13 +105,13 @@ class BehaviorConfig(BaseModel):
     """
 
     human_delays: bool = Field(default=True, description="Add human-like delays")
-    delay_range: tuple[float, float] = Field(
+    delay_range: Tuple[float, float] = Field(
         default=(0.3, 1.5), description="Delay range in seconds (min, max)"
     )
 
     @field_validator("delay_range")
     @classmethod
-    def validate_delay_range(cls, v: tuple[float, float]) -> tuple[float, float]:
+    def validate_delay_range(cls, v: Tuple[float, float]) -> Tuple[float, float]:
         """Validate that delay_range is valid.
 
         Args:

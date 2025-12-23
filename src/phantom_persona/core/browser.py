@@ -4,7 +4,7 @@ This module provides the BrowserManager class for managing Playwright
 browser lifecycle, including starting, stopping, and configuration.
 """
 
-from typing import TYPE_CHECKING, Any, Optional
+from typing import TYPE_CHECKING, Any, Dict, Optional
 
 from playwright.async_api import async_playwright
 
@@ -138,7 +138,7 @@ class BrowserManager:
             finally:
                 self._playwright = None
 
-    def _build_launch_args(self) -> dict[str, Any]:
+    def _build_launch_args(self) -> Dict[str, Any]:
         """Build browser launch arguments from configuration.
 
         Converts BrowserConfig settings into Playwright launch arguments.
@@ -152,7 +152,7 @@ class BrowserManager:
             >>> print(args)
             {'headless': True, 'slow_mo': 0}
         """
-        args: dict[str, Any] = {
+        args: Dict[str, Any] = {
             "headless": self.config.headless,
             "slow_mo": self.config.slow_mo,
         }
